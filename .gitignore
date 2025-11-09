@@ -1,0 +1,61 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build artifacts
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.pdb
+*.dll
+*.exe
+*.tmp
+*.log
+*.bak
+
+# NuGet packages
+packages/
+*.nupkg
+.nuget/
+
+# Rider
+.idea/
+
+# DotNet tools
+.config/dotnet-tools.json
+
+# Test results
+TestResults/
+
+# Azure artifacts
+AzureArtifacts/
+
+# Other temporary files
+*.~
+*.scc
+*.vspscc
+*.vssscc
+*.buildscc
+*.pidb
+*.vshost.*
+
+# User-specific files
+*.userprefs
+
+# Recommended for .NET projects
+project.lock.json
+project.assets.json
+
+# Local settings
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.Local.json
+
+# Docker files
+Dockerfile.develop
+Dockerfile.release
