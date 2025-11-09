@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+.dockerignore
+Dockerfile
+**/*.user
+**/*.suo
+**/*.vs
+**/*.bak
+**/*.log
+**/*.tmp
+**/*.pdb
+**/*.md
+**/*.txt
