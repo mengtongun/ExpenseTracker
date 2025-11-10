@@ -22,11 +22,6 @@ A production-ready ASP.NET Core Web API for tracking personal expenses, managing
 - [Configuration](#configuration)
 - [Database Migrations](#database-migrations)
 - [Database Seeding](#database-seeding)
-- [Docker Deployment](#docker-deployment)
-- [API Documentation](#api-documentation)
-- [Development](#development)
-- [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
 
 ## 🏗️ Architecture
 
@@ -110,35 +105,6 @@ API will listen on `https://localhost:5001` / `http://localhost:5000` by default
 
 Run `make help` to see all available commands. Key commands:
 
-**Build & Run:**
-
-- `make restore` - Restore NuGet packages
-- `make build` - Build the solution
-- `make run` - Run the API locally
-- `make run-watch` - Run with hot reload
-
-**Database:**
-
-- `make migrate NAME=migration-name` - Create a new migration
-- `make migrate-update` - Apply pending migrations to the database
-- `make migrate-list` - List all migrations
-- `make migrate-remove` - Remove the last migration
-- `make migrate-reset NAME=InitialCreate` - Reset migrations (drops DB and removes all migrations)
-- `make seed` - Manually seed the database
-
-**Docker:**
-
-- `make docker-build` - Build Docker image
-- `make docker-up` - Start all Docker containers
-- `make docker-down` - Stop all Docker containers
-- `make docker-restart` - Restart all containers
-- `make docker-logs` - View container logs
-
-**Development:**
-
-- `make dev-setup` - Complete development setup
-- `make dev-reset` - Reset development environment
-
 ## Database Migrations
 
 **Important:** Migrations are **manual** and must be applied explicitly. The API does not automatically apply migrations on startup.
@@ -168,19 +134,6 @@ dotnet ef database update \
   --startup-project src/ExpenseTrackerApi
 ```
 
-### Other Migration Commands
-
-```bash
-# List all migrations
-make migrate-list
-
-# Remove the last migration
-make migrate-remove
-
-# Reset migrations (drops database and removes all migrations)
-make migrate-reset NAME=InitialCreate
-```
-
 **Note:** Always commit generated migration files so other environments can bootstrap the schema.
 
 ## Database Seeding
@@ -198,61 +151,3 @@ dotnet run --project src/ExpenseTrackerApi -- --seed
 ```
 
 This will populate the database with initial data (users, categories, etc.) as defined in the `DataSeeder` class.
-
-## Docker Deployment
-
-The repository includes a multi-stage `Dockerfile` and `docker-compose.yml`:
-
-### Using Makefile
-
-```bash
-# Build Docker image
-make docker-build
-
-# Start all containers
-make docker-up
-
-# Stop all containers
-make docker-down
-
-# View logs
-make docker-logs
-
-# View API logs only
-make docker-logs-api
-
-# View database logs only
-make docker-logs-db
-```
-
-### Manual Docker Commands
-
-```bash
-# Start services
-docker compose up --build
-
-# Start in detached mode
-docker compose up -d
-
-# Stop services
-docker compose down
-
-# View logs
-docker compose logs -f
-```
-
-### Services
-
-- `api` — ExpenseTracker API (exposes port `8080` by default)
-- `sqlserver` — SQL Server 2022 container with persistent volume
-
-**Important:** After starting Docker containers, you must manually apply migrations:
-
-```bash
-# Apply migrations to the Docker database
-make migrate-update
-```
-
-The connection string in `docker-compose.yml` is configured to connect to the SQL Server container.
-
-**Note:** Migrations are not automatically applied when using Docker. You must run `make migrate-update` after starting the containers.
